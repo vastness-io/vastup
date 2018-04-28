@@ -9,6 +9,10 @@ import (
 type LocalBackend struct{}
 
 // Read will return a context
-func (l *LocalBackend) Read(ctx up.BuildContext) error {
+func (l *LocalBackend) Read() error {
+	return nil
+}
 
+func (l *LocalBackend) Write(ctx up.BuildContext) error {
+	return nil
 }
