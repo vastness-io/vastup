@@ -22,8 +22,7 @@ func (l *LocalBackend) Write(ctx up.BuildContext) error {
 	return nil
 }
 
-// New will create a new default build context and use Write to store it
-// to disk.
+// New will create a new build context and store it to disk.
 func (l *LocalBackend) New() error {
 
 	const (
