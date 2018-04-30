@@ -1,7 +1,7 @@
 package resources
 
 import (
-	"github.com/PI-Victor/vastup/pkg/up"
+	"github.com/vastness-io/vastup/pkg/up"
 )
 
 const (

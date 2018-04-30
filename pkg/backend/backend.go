@@ -1,7 +1,7 @@
 package backend
 
 import (
-	"github.com/PI-Victor/vastup/pkg/up"
+	"github.com/vastness-io/vastup/pkg/up"
 )
 
 // Backend abstracts away the persistent options for vastup.

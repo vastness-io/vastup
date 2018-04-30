@@ -3,7 +3,7 @@ package backend
 import (
 	"path"
 
-	"github.com/PI-Victor/vastup/pkg/up"
+	"github.com/vastness-io/vastup/pkg/up"
 )
 
 // LocalBackend is the default backend used for storing context and component
