@@ -25,7 +25,7 @@ func init() {
 func main() {
 	cmd := &cobra.Command{
 		Use:   "vastup",
-		Short: "vastup - Bootstrap vastness components locally",
+		Short: "vastup - Bootstrap vastness components on various environments",
 		Example: `Bootstrap vastness components locally for testing:
 $ vastctl run
 ...
@@ -40,6 +40,6 @@ Endpoint available at https://127.0.0.1:8081
 	cmd.AddCommand(cli.SetContext)
 	cmd.AddCommand(cli.SetBackend)
 	if err := cmd.Execute(); err != nil {
-		logrus.Panicf("")
+		logrus.Panicf("Failed to load commands: %#v", err)
 	}
 }

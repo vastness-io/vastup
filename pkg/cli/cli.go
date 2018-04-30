@@ -11,8 +11,10 @@ var (
 	// Up will start the platform components in the order of dependencies.
 	Up = &cobra.Command{
 		Use:   "run",
-		Short: "Bootstrap a new vastness platform instance.=",
-		Run:   func(cmd *cobra.Command, args []string) {},
+		Short: "Bootstrap a new vastness platform instance",
+		Run: func(cmd *cobra.Command, args []string) {
+
+		},
 	}
 
 	// SetContext will set the component directory context that will be used
