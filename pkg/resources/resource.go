@@ -7,5 +7,5 @@ import (
 // Resource abstracts away a platform resource
 type Resource interface {
 	Start(ctx up.BuildContext) error
-	Build(ctx up.BuildContext) errorq
+	Build(ctx up.BuildContext) error
 }

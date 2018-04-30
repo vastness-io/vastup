@@ -30,6 +30,8 @@ func RetryOnFailure(ctx up.BuildContext, f execFunc) (bool, []error) {
 			time.Sleep(wait)
 			continue
 		}
+		// NOTE: we still want to bubble up errors and send them up the stack so
+		// we can log potential problems with the called process.
 		return true, errors
 	}
 	return false, errors
