@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	coordinatorImage = "quay.io/vastness-io/coordinator:latest"
+	coordinatorImage = "quay.io/vastness/coordinator:latest"
 )
 
 // Coordinator has the functionality to build/slice and operate the vastness
