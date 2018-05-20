@@ -15,7 +15,7 @@ type BuildContext struct {
 
 // Config holds the configuration of the application and loads each components specific
 // context. If a component context is not available, then the component container image
-// will be pulled from the directory.
+// will be pulled from the registry.
 type Config struct {
 	CoordinatorContext *BuildContext `json:"coordinator_context,omitempty"`
 	VCSWebHookContext  *BuildContext `json:"vcs_webhook_context,omitempty"`
