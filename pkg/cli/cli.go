@@ -9,6 +9,7 @@ import (
 )
 
 var (
+	devBootstrap       bool
 	coordinatorContext string
 	vcsWebHookContext  string
 	linguistContext    string
@@ -22,31 +23,19 @@ var (
 		Run: func(cmd *cobra.Command, args []string) {
 			config := &bootstrap.Config{}
 
+			logrus.Debugf("Loading configuration from: %s", viper.ConfigFileUsed())
 			if err := viper.Unmarshal(config); err != nil {
 				logrus.Panicf("Error while loading config: %#v", err)
 			}
 
-			if config.CoordinatorContext != nil {
-				logrus.Info("Validating context for Coordinator")
-				if err := bootstrap.ValidateBuildContext(config.CoordinatorContext); err != nil {
-					logrus.Errorf("Failed to validate context for Coordinator: %#v", err)
-				}
+			logrus.Debug("Validating components context")
+			if err := bootstrap.ValidateBuildContext(config.Context); err != nil {
+				logrus.Errorf("Failed to validate component context: %s", err)
 			}
-
-			if config.VCSWebHookContext != nil {
-				logrus.Info("Validating context for VCS-Webhook")
-				if err := bootstrap.ValidateBuildContext(config.VCSWebHookContext); err != nil {
-					logrus.Errorf("Failed to validate context for VCS-Webhook: %#v", err)
-				}
-			}
-
-			if config.LinguistContext != nil {
-				logrus.Info("Validating context for Linguist")
-				if err := bootstrap.ValidateBuildContext(config.LinguistContext); err != nil {
-					logrus.Errorf("Failed to validate context for Linguist: %#v", err)
-				}
-			}
-
+			// NOTE: at this point we will handle errors lower in the stack because we have
+			// components that could fail the bootstrap while others are successful, thus
+			// making the bootstrap operation valid.
+			bootstrap.Up(config)
 		},
 	}
 
@@ -72,6 +61,13 @@ var (
 )
 
 func init() {
+	Run.PersistentFlags().BoolVar(
+		&devBootstrap,
+		"dev-bootstrap",
+		false,
+		"Bootstrap new components with updated local binaries",
+	)
+
 	SetContext.PersistentFlags().StringVar(
 		&coordinatorContext,
 		"coordinator",
