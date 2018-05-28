@@ -22,11 +22,12 @@ Endpoint available at https://127.0.0.1:8081
 		},
 	}
 
-	cmd.AddCommand(cli.Up)
+	cmd.AddCommand(cli.Run)
 	cmd.AddCommand(cli.SetContext)
 	cmd.AddCommand(cli.SetBackend)
+
 	if err := cmd.Execute(); err != nil {
-		logrus.Panicf("Failed to load commands: %s", err)
+		logrus.Errorf("Failed to load command: %s", err)
 	}
 }
 
