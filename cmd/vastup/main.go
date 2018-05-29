@@ -39,8 +39,7 @@ func init() {
 	viper.SetConfigType("json")
 
 	viper.AddConfigPath(".")
-	viper.AddConfigPath("$HOME")
 	if err := viper.ReadInConfig(); err != nil {
-		logrus.Panicf("Failed to read config file: %s", err)
+		logrus.Errorf("Failed to read config file: %s", err)
 	}
 }
