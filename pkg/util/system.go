@@ -10,7 +10,7 @@ func ValidateContext(dirPath, componentName string) error {
 	if err := validateDir(dirPath); err != nil {
 		return err
 	}
-	amd64BinPath := filepath.Join(dirPath, fmt.Sprintf("%s", componentName))
+	amd64BinPath := filepath.Join(dirPath, fmt.Sprintf("bin/linux/amd64/%s", componentName))
 	if err := validateBin(amd64BinPath); err != nil {
 		return err
 	}
