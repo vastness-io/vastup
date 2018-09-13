@@ -9,7 +9,8 @@ import (
 )
 
 var (
-	devBootstrap       bool
+	devBootstrap bool
+
 	coordinatorContext string
 	vcsWebHookContext  string
 	linguistContext    string
@@ -29,7 +30,7 @@ var (
 			}
 
 			logrus.Debug("Validating components context")
-			if err := bootstrap.ValidateBuildContext(config.Context); err != nil {
+			if err := bootstrap.ValidateBuildContext(config.Components); err != nil {
 				logrus.Errorf("Failed to validate component context: %s", err)
 			}
 			// NOTE: at this point we will handle errors lower in the stack because we have
@@ -38,6 +39,21 @@ var (
 			bootstrap.Up(config)
 		},
 	}
+
+	// Stop will shut down all of the container components.
+	Stop = &cobra.Command{
+		Use:   "stop",
+		Short: "Stop all running vastness components",
+		Run: func(cmd *cobra.Command, args []string) {
+			config := &bootstrap.Config{}
+			logrus.Debugf("Loading configuration from: %s", viper.ConfigFileUsed())
+			if err := viper.Unmarshal(config); err != nil {
+				logrus.Panicf("Error while loading config: %#v", err)
+			}
+		},
+	}
+
+	
 
 	// SetContext will set the component directory context that will be used
 	// to build the component container images.
@@ -67,7 +83,7 @@ func init() {
 		false,
 		"Bootstrap new components with updated local binaries",
 	)
-
+	// NOTE: should we still use this or go full configuration file?
 	SetContext.PersistentFlags().StringVar(
 		&coordinatorContext,
 		"coordinator",
