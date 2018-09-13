@@ -1,0 +1,30 @@
+LogLevel: 1
+
+Network:
+  Name: vastness-internal
+
+Components:
+  - name: vcs-webhook
+    repositoryPath: "/Users/paladion/projects/go/src/github.com/vastness-io/vcs-webhook"
+    binPath: "bin/linux/amd64/vcs-webhook"
+    Image: 
+      Name: quay.io/vastness/vcs-webhook:latest
+      
+  - name: coordinator
+    repositoryPath: "/Users/paladion/projects/go/src/github.com/vastness-io/coordinator"
+    binPath: "bin/linux/amd64/coordinator"
+    Image: 
+      Name: quay.io/vastness/coordinator:latest
+
+  - name: linguist
+    repositoryPath: "/Users/paladion/projects/go/src/github.com/vastness-io/linguist"
+    binPath: "bin/linux/amd64/linguist"
+    Image: 
+      Name: quay.io/vastness/linguist:latest
+
+  - name: parser
+    repositoryPath: "/Users/paladion/projects/go/src/github.com/vastness-io/parser"
+    binPath: "bin/linux/amd64/parser"
+    Image: 
+      Name: quay.io/vastness/parser:latest
+      
